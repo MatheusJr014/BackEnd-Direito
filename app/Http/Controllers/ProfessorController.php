@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\CadastroProfessor;
 use App\Models\Professor;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
