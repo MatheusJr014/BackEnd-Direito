@@ -16,7 +16,7 @@ class Professor extends Model
     protected $fillable = [
         'nome',
         'matricula',
-        'e-mail',
+        'email',
         'senha'
     ];
 }

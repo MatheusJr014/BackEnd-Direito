@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('professor', function (Blueprint $table) {
             $table->id();
+            $table->string('nome')->nullable();
             $table->integer('matricula')->nullable();
-            $table->string('e-mail')->nullable();
+            $table->string('email')->nullable();
             $table->string('senha')->nullable(); 
             $table->timestamps();
         });
