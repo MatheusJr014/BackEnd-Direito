@@ -24,6 +24,32 @@ class ProfessorController extends Controller
         return response($this->model->all()); 
     }
 
+    public function validationMatricula(Request $request)
+    {
+        $existingMatricula = Professor::where('matricula', $request->input('matricula'))->first();
+        if ($existingMatricula){
+            return response()->json(['error' => 'Matricula já cadastrada'], 400); 
+
+        } 
+
+        $professor = new Professor(); 
+        $professor->matricula = $request->input('matricula'); 
+        $professor->save(); 
+        return response()->json(['message' => 'Matricula cadastrada com sucesso'], 201); 
+    }
+
+    public function validationEmail(Request $request)
+    {
+        $existingEmail = Professor::where('email', $request->input('email'))->first(); 
+        if ($existingEmail){
+            return response()->json(['error'=> 'Esse email já é cadastrado'], 400); 
+        }
+
+        $professor = new Professor(); 
+        $professor->email = $request->input('email'); 
+        $professor->save(); 
+        return response()->json(['message'=> 'Email cadastrado com sucesso'], 201); 
+    }
     /**
      * Show the form for creating a new resource.
      */
