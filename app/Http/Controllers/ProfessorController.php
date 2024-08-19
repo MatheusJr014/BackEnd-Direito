@@ -24,32 +24,8 @@ class ProfessorController extends Controller
         return response($this->model->all()); 
     }
 
-    public function validationMatricula(Request $request)
-    {
-        $existingMatricula = Professor::where('matricula', $request->input('matricula'))->first();
-        if ($existingMatricula){
-            return response()->json(['error' => 'Matricula já cadastrada'], 400); 
 
-        } 
 
-        $professor = new Professor(); 
-        $professor->matricula = $request->input('matricula'); 
-        $professor->save(); 
-        return response()->json(['message' => 'Matricula cadastrada com sucesso'], 201); 
-    }
-
-    public function validationEmail(Request $request)
-    {
-        $existingEmail = Professor::where('email', $request->input('email'))->first(); 
-        if ($existingEmail){
-            return response()->json(['error'=> 'Esse email já é cadastrado'], 400); 
-        }
-
-        $professor = new Professor(); 
-        $professor->email = $request->input('email'); 
-        $professor->save(); 
-        return response()->json(['message'=> 'Email cadastrado com sucesso'], 201); 
-    }
     /**
      * Show the form for creating a new resource.
      */
@@ -59,16 +35,31 @@ class ProfessorController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in store.
      */
-    public function criar(Request $request)
+    public function store(Request $request)
     {
-        try{
-            $this->model->create($request->all());
-            return response('Criado com sucesso!'); 
-        } catch(\Throwable $th){
-            throw $th; 
-        }
+            $data = $request->validate([
+                'nome'=> 'required|string',
+                'matricula'=> 'required|integer|unique:professor,matricula', 
+                'email'=> 'required|string|unique:professor,email', 
+                'senha'=> 'required|string'
+            ], [
+                'matricula.unique' => 'Matricula já cadastrada.',
+                'email.unique' => 'Email já cadastrado.',
+            ]);     
+        
+            Professor::create([
+                'nome' => $data ['nome'],
+                'matricula' => $data['matricula'],
+                'email' => $data['email'],
+                'senha' => bcrypt($data['senha']) // Exemplo para hash da senha
+            ]);
+
+        return response()->json(['message'=> 'Cadastro realizado com sucesso!'], 201); 
+        
+        
+      
 
     }
 

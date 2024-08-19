@@ -2,7 +2,6 @@
 
 
 
-//IGNORAR ESTÁ ERRADO ISSO AQUI ABAIXO
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

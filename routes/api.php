@@ -19,6 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/index',[ProfessorController::class, 'index'])->name('api.indexteste');
-Route::post('/criar',[ProfessorController::class, 'criar'])->name('api.criar');
-Route::post('/validationMatricula', [ProfessorController::class, 'validationMatricula'])->name('api.validationMatricula'); 
-Route::post('/validationEmail', [ProfessorController::class, 'validationEmail'])->name('api.validationEmail'); 
+Route::post('/store',[ProfessorController::class, 'store'])->name('api.store');
