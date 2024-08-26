@@ -57,10 +57,6 @@ class ProfessorController extends Controller
             ]);
 
         return response()->json(['message'=> 'Cadastro realizado com sucesso!'], 201); 
-        
-        
-      
-
     }
 
     /**
