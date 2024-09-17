@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -29,3 +30,8 @@ Route::post('/store',[ProfessorController::class, 'store'])->name('api.store');
 
 Route::get('/viewcadastros', [AlunoController::class, 'viewcadastros'])->name('api.viewcadastros');
 Route::post('/criaaluno', [AlunoController::class, 'criaaluno'])->name('api.criaaluno'); 
+
+
+Route::post('login', [AuthController::class, 'login']);
+
+

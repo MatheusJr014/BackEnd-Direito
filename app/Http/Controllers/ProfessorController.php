@@ -8,7 +8,8 @@ use App\Models\Professor;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
 
-class ProfessorController extends Controller
+
+class ProfessorController extends Controller 
 {
     protected $model; 
 
