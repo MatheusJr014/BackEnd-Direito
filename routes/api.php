@@ -34,4 +34,6 @@ Route::post('/criaaluno', [AlunoController::class, 'criaaluno'])->name('api.cria
 
 Route::post('login', [AuthController::class, 'login']);
 
+Route::post('/login-professor', [AuthController::class, 'login_professor']);
+
 
