@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\LoginProfessor;
 use App\Models\Professor;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\TryCatch;
@@ -60,35 +60,20 @@ class ProfessorController extends Controller
         return response()->json(['message'=> 'Cadastro realizado com sucesso!'], 201); 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+   public function login_professor(LoginProfessor $request){
+        $input = $request->validated();
+        $credentials = [
+            'matricula' => $input['matricula'], 
+            'password' => $input['senha'],
+        ];
+        if(!$token = auth()->attempt($credentials)){
+            return response()->json(['error'=>'Unauthorized'],401); 
+        }
+        return response()->json([
+            'acess_token'=>$token,
+            'token_type'=>'bearer', 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        ]);
+   }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
